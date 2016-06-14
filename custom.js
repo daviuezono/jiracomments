@@ -42,22 +42,25 @@ $(document).ready(function() {
 
     // We have CMS changes?
     html += '*Do we have CMS changes?*' + newLine;
-    html += $('input[name=cms_changes]:checked', idForm).val() + doubleNewLine;
-
-    // Steps
-    html += 'h3. Steps' + doubleNewLine;
-    var array_cms_changes_steps_title = [];
-    var array_cms_changes_steps_description = [];
-    $('input[name^="cms_changes_steps_title"]').each(function() {
-      array_cms_changes_steps_title.push($(this).val());
-    });
-    $('textarea[name^="cms_changes_steps_description"]').each(function() {
-      array_cms_changes_steps_description.push($(this).val());
-    });
-    $('input[name^="cms_changes_steps_title"]').each(function(index) {
-      html += '*' + (index + 1) + ') ' + array_cms_changes_steps_title[index] + '*' + newLine;
-      html += array_cms_changes_steps_description[index] + doubleNewLine;
-    });
+    var cms_changes_answer = $('input[name=cms_changes]:checked', idForm).val();
+    html += cms_changes_answer + doubleNewLine;
+      
+    if (cms_changes_answer != 'No') {
+      // Steps
+      html += 'h3. Steps' + doubleNewLine;
+      var array_cms_changes_steps_title = [];
+      var array_cms_changes_steps_description = [];
+      $('input[name^="cms_changes_steps_title"]').each(function() {
+        array_cms_changes_steps_title.push($(this).val());
+      });
+      $('textarea[name^="cms_changes_steps_description"]').each(function() {
+        array_cms_changes_steps_description.push($(this).val());
+      });
+      $('input[name^="cms_changes_steps_title"]').each(function(index) {
+        html += '*' + (index + 1) + ') ' + array_cms_changes_steps_title[index] + '*' + newLine;
+        html += array_cms_changes_steps_description[index] + doubleNewLine;
+      });
+    }
 
     // Comments
     var cms_comments = $('textarea[name=comments]', idForm).val();
@@ -83,8 +86,8 @@ $(document).ready(function() {
     });
     $('input[name^="unit_tests_steps_title"]').each(function(index) {
       html += '*' + (index + 1) + ') ' + array_unit_tests_steps_title[index] + '*' + newLine;
-      html += 'Steps :' + unit_tests_steps_steps[index] + doubleNewLine;
-      html += 'Expected Results :' + array_unit_tests_steps_description[index] + doubleNewLine;
+      html += 'Steps: ' + unit_tests_steps_steps[index] + doubleNewLine;
+      html += 'Expected Results: ' + array_unit_tests_steps_description[index] + doubleNewLine;
     });
 
     // ====== Result
