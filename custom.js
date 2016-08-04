@@ -18,23 +18,26 @@ $(document).ready(function() {
 
     // We have code changes?
     html += '*Do we have code changes?*' + newLine;
-    html += $('input[name=code_changes]:checked', idForm).val() + doubleNewLine;
-
-    // Changes Type:
-    html += '*Technology:*' + newLine;
-    var code_changes_type = $('input:checkbox[name^=code_changes_type]:checked');
-    if(code_changes_type.length > 0){
-      code_changes_type.each(function(){
-        html += '* ' + $(this).val() + newLine;
-      });
-      html += newLine;
-    }
-
-    // More details:
-    var more_details = $('textarea[name=code_more_details]', idForm).val();
-    if (more_details.length > 0) {
-      html += '*More Details:*' + newLine;
-      html += more_details + doubleNewLine;
+    var code_changes_answer = $('input[name=code_changes]:checked', idForm).val();
+    html += code_changes_answer + doubleNewLine;
+    
+    if (code_changes_answer != 'No') {
+      // Changes Type:
+      html += '*Technology:*' + newLine;
+      var code_changes_type = $('input:checkbox[name^=code_changes_type]:checked');
+      if(code_changes_type.length > 0){
+        code_changes_type.each(function(){
+          html += '* ' + $(this).val() + newLine;
+        });
+        html += newLine;
+      }
+  
+      // More details:
+      var more_details = $('textarea[name=code_more_details]', idForm).val();
+      if (more_details.length > 0) {
+        html += '*More Details:*' + newLine;
+        html += more_details + doubleNewLine;
+      }
     }
 
     // ====== CMS CHANGES
